@@ -1,23 +1,27 @@
 package hw6.entity;
 
-public class Team {
-    private int position ;
-    private String club;
-    private int played,won,drawn,lost,gf,ga,gd,points;
+import java.util.Objects;
 
-    public Team( String club, int played, int won, int drawn, int lost, int gf, int ga, int gd, int points) {
-        this.club = club;
-        this.played = played;
+public class Football_Team{
+    private int position ;
+
+    private int played,won,drawn,lost,gf,ga,gd,points;
+    private String club;
+
+    public Football_Team(String club, int played, int won, int drawn, int lost, int gf, int ga, int gd, int points) {
+        this.club =club;
         this.won = won;
         this.drawn = drawn;
+        this.played = played;
         this.lost = lost;
         this.gf = gf;
         this.ga = ga;
         this.gd = gd;
         this.points = points;
     }
-    public Team(String club ){
-        this.club = club;
+
+    public Football_Team(String clubName) {
+        this.club =clubName;
     }
 
     public int getPosition() {
@@ -28,16 +32,18 @@ public class Team {
         this.position = position;
     }
 
+
+
+    public int getPlayed() {
+        return played;
+    }
+
     public String getClub() {
         return club;
     }
 
     public void setClub(String club) {
         this.club = club;
-    }
-
-    public int getPlayed() {
-        return played;
     }
 
     public void setPlayed(int played) {
@@ -67,16 +73,28 @@ public class Team {
     public void setLost(int lost) {
         this.lost = lost;
     }
-    public Team(){}
-
     public int getGf() {
         return gf;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Football_Team that = (Football_Team) o;
+        return position == that.position && played == that.played && won == that.won && drawn == that.drawn && lost == that.lost && gf == that.gf && ga == that.ga && gd == that.gd && points == that.points && club.equals(that.club);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, played, won, drawn, lost, gf, ga, gd, points, club);
+    }
+
     @Override
     public String toString() {
-        return "Team{" +
-                "club='" + club + '\'' +
+        return "Football_Team{" +
+                "position=" + position +
                 ", played=" + played +
                 ", won=" + won +
                 ", drawn=" + drawn +
@@ -85,6 +103,7 @@ public class Team {
                 ", ga=" + ga +
                 ", gd=" + gd +
                 ", points=" + points +
+                ", club='" + club + '\'' +
                 '}';
     }
 
