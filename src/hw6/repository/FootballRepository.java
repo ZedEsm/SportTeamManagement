@@ -1,6 +1,7 @@
 package hw6.repository;
 
 import hw6.entity.Football_Team;
+import hw6.entity.Team;
 import hw6.util.ApplicationConstant;
 
 import java.sql.PreparedStatement;
@@ -23,12 +24,7 @@ public class FootballRepository {
         prepareStatement.setInt(7, 0);
         prepareStatement.setInt(8, 0);
         prepareStatement.setInt(9, 0);
-        int index = prepareStatement.executeUpdate();
-        if (index > 0) {
-            System.out.println("Club Added");
-        } else {
-            System.out.println("Club Addition Failed");
-        }
+        prepareStatement.executeUpdate();
     }
 
     public Football_Team findByName(String name) throws Exception {
@@ -46,8 +42,7 @@ public class FootballRepository {
             int ga = resultSet.getInt("ga");
             int gd = resultSet.getInt("gd");
             int points = resultSet.getInt("points");
-            Football_Team footballTeam = new Football_Team(clubName, played, won, drawn, lost, gf, ga, gd, points);
-            return footballTeam;
+            return new Football_Team(clubName, played, won, drawn, lost, gf, ga, gd, points);
         }
         throw new Exception("Football_Team Not Found");
     }
@@ -58,20 +53,20 @@ public class FootballRepository {
         prepareStatement.setInt(1, footballTeam.getPlayed());
         prepareStatement.setInt(2, footballTeam.getWon());
         prepareStatement.setInt(3, footballTeam.getDrawn());
-        prepareStatement.setInt(4, footballTeam.getLost());
+        prepareStatement.setInt(4, footballTeam.getLose());
         prepareStatement.setInt(5, footballTeam.getGf());
         prepareStatement.setInt(6, footballTeam.getGa());
         prepareStatement.setInt(7, footballTeam.getGd());
         prepareStatement.setInt(8, footballTeam.getPoints());
-        prepareStatement.setString(9, footballTeam.getClub());
+        prepareStatement.setString(9, footballTeam.getName());
         int upIndex = prepareStatement.executeUpdate();
         if (upIndex < 0) {
             System.out.println("Update Failed");
         }
     }
 
-    public List<Football_Team> showTable() throws SQLException {
-        List<Football_Team> footballTeams = new ArrayList<>();
+    public List<Team> showTable() throws SQLException {
+        List<Team> footballTeams = new ArrayList<>();
         String query = "SELECT * FROM footbal ORDER BY points DESC";
         PreparedStatement preparedStatement = ApplicationConstant.getConnection().prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,44 +80,20 @@ public class FootballRepository {
             int ga = resultSet.getInt("ga");
             int gd = resultSet.getInt("gd");
             int points = resultSet.getInt("points");
-            Football_Team footballTeam = new Football_Team(club, played, won, drawn, lost, gf, ga, gd, points);
+            Team footballTeam = new Football_Team(club, played, won, drawn, lost, gf, ga, gd, points);
             footballTeams.add(footballTeam);
 
         }
         return footballTeams;
     }
-//    public List<Football_Team> showTableBazi(String name) throws SQLException {
-//        List<Football_Team> footballTeams = new ArrayList<>();
-//        String query = "SELECT * FROM bazi WHERE hometeam =?";
-//        PreparedStatement preparedStatement = ApplicationConstant.getConnection().prepareStatement(query);
-//        preparedStatement.setString(1,name);
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        while (resultSet.next()) {
-//            String s1 = resultSet.getString("hometeam");
-//            String s2= resultSet.getString("foreignnteam");
-//            int gf1 = resultSet.getInt("goalhome");
-//            int gf2 = resultSet.getInt("goalforeign");
-//            Football_Team footballTeam = new Football_Team();
-//            footballTeams.add(footballTeam);
-//
-//        }
-//        return footballTeams;
-//    }
-    public boolean match(Football_Team footballTeam,Football_Team secondFootballTeam,int gft1,int gft2) throws SQLException {
+    public void match(Football_Team footballTeam, Football_Team secondFootballTeam, int gft1, int gft2) throws SQLException {
         String QUERY = "INSERT INTO bazi(hometeam,foreignnteam,goalhome,goalforeign) VALUES (?,?,?,?)";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
-        prepareStatement.setString(1,footballTeam.getClub());
-        prepareStatement.setString(2,secondFootballTeam.getClub());
-        prepareStatement.setInt(3,gft1);
-        prepareStatement.setInt(4,gft2);
-        int index = prepareStatement.executeUpdate();
-        if (index > 0) {
-            //System.out.println("Match Done");
-            return true;
-        } else {
-            System.out.println("Match Failed");
-            return false;
-        }
+        prepareStatement.setString(1, footballTeam.getName());
+        prepareStatement.setString(2, secondFootballTeam.getName());
+        prepareStatement.setInt(3, gft1);
+        prepareStatement.setInt(4, gft2);
+        prepareStatement.executeUpdate();
     }
 
 }
