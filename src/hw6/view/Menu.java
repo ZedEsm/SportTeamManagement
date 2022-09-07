@@ -15,11 +15,9 @@ public class Menu {
     private static final FootballService footballservice = new FootballService();
 
     private static final VolleyballService volleyballService = new VolleyballService();
-    private static int drawn;
-    private static int drawn2;
     private static FootballTeam firstFootballTeam;
 
-    private static Team volleyballT1;
+    private static Team firstVolleyballTeam;
     static List<Team> teamList;
     static int gft1;
     static int gft2;
@@ -169,7 +167,7 @@ public class Menu {
         firstFootballTeam = (FootballTeam) findName(t1);
         List<Team> teams1 = showFootTable();
         for (Team footballTeam : teams1) {
-            if (!footballTeam.getName().equals(firstFootballTeam.getName())) {
+            if (!footballTeam.getName().equals(firstFootballTeam.getName()) && (footballTeam.getName() != null)) {
                 System.out.println(footballTeam.getName());
                 System.out.println("Enter Goal Of Team1:");
                 gft1 = scanner.nextInt();
@@ -245,14 +243,15 @@ public class Menu {
                     firstFootballTeam.setGd(gd1);
                     int gd2 = gf2 - ga2;
                     ((FootballTeam) footballTeam).setGd(gd2);
-
-                    drawn++;
-                    drawn2++;
+                    int drawn = 0;
+                    int drawn2 = 0;
+                    drawn += 1;
+                    drawn2 += 1;
                     int points = firstFootballTeam.getPoints();
-                    points += drawn;
+                    points += 1;
                     firstFootballTeam.setPoints(points);
                     int points2 = footballTeam.getPoints();
-                    points2 += drawn2;
+                    points2 += 1;
                     footballTeam.setPoints(points2);
 
                     int dw1 = firstFootballTeam.getDrawn();
@@ -260,8 +259,8 @@ public class Menu {
                     firstFootballTeam.setDrawn(drawn);
 
                     int dw2 = ((FootballTeam) footballTeam).getDrawn();
-                    drawn += dw2;
-                    ((FootballTeam) footballTeam).setDrawn(drawn);
+                    drawn2 += dw2;
+                    ((FootballTeam) footballTeam).setDrawn(drawn2);
                 } else {
 
                     int gf1 = firstFootballTeam.getGf();
@@ -339,22 +338,22 @@ public class Menu {
     }
 
     public static void volleyballCompositionStart(String name) throws SQLException {
-        volleyballT1 = findVolleyballByName(name);
+        firstVolleyballTeam = findVolleyballByName(name);
         List<Team> volleyball = showVolleyballTable();
         for (Team volleyballTeam : volleyball) {
-            if (!volleyballTeam.getName().equals(volleyballT1.getName())) {
+            if (!volleyballTeam.getName().equals(firstVolleyballTeam.getName()) && (volleyballTeam.getName() != null)) {
                 System.out.println(volleyballTeam.getName());
                 System.out.println("Enter Goal Of Team1:");
                 setHomeTeam = scanner.nextInt();
                 System.out.println("Enter goal Of Team2");
                 setForeignTeam = scanner.nextInt();
-                if (setHomeTeam == 3 && setForeignTeam == 0 || setHomeTeam == 3 && setForeignTeam == 1) {//foregin benivis
+                if (setHomeTeam == 3 && setForeignTeam == 0 || setHomeTeam == 3 && setForeignTeam == 1) {
 
-                    int played1 = volleyballT1.getPlayed();
+                    int played1 = firstVolleyballTeam.getPlayed();
                     int played2 = volleyballTeam.getPlayed();
                     played1 += 1;
                     played2 += 1;
-                    volleyballT1.setPlayed(played1);
+                    firstVolleyballTeam.setPlayed(played1);
                     volleyballTeam.setPlayed(played2);
 
                     int won = 0;
@@ -362,24 +361,24 @@ public class Menu {
                     int lose = 0;
                     lose += 1;
 
-                    int points = volleyballT1.getPoints();
+                    int points = firstVolleyballTeam.getPoints();
                     points += 3;
-                    volleyballT1.setPoints(points);
+                    firstVolleyballTeam.setPoints(points);
 
-                    int win = volleyballT1.getWon();
+                    int win = firstVolleyballTeam.getWon();
                     won += win;
-                    volleyballT1.setWon(won);
+                    firstVolleyballTeam.setWon(won);
 
                     int lost = volleyballTeam.getLose();
                     lose += lost;
                     volleyballTeam.setLose(lose);
 
                 } else if (setHomeTeam == 3 && setForeignTeam == 2) {
-                    int played1 = volleyballT1.getPlayed();
+                    int played1 = firstVolleyballTeam.getPlayed();
                     int played2 = volleyballTeam.getPlayed();
                     played1 += 1;
                     played2 += 1;
-                    volleyballT1.setPlayed(played1);
+                    firstVolleyballTeam.setPlayed(played1);
                     volleyballTeam.setPlayed(played2);
 
                     int won = 0;
@@ -387,27 +386,27 @@ public class Menu {
                     int lose = 0;
                     lose += 1;
 
-                    int points = volleyballT1.getPoints();
+                    int points = firstVolleyballTeam.getPoints();
                     points += 2;
-                    volleyballT1.setPoints(points);
+                    firstVolleyballTeam.setPoints(points);
 
                     int points2 = volleyballTeam.getPoints();
                     points2 += 1;
                     volleyballTeam.setPoints(points2);
 
-                    int win = volleyballT1.getWon();
+                    int win = firstVolleyballTeam.getWon();
                     won += win;
-                    volleyballT1.setWon(won);
+                    firstVolleyballTeam.setWon(won);
 
                     int lost = volleyballTeam.getLose();
                     lose += lost;
                     volleyballTeam.setLose(lose);
                 } else if (setHomeTeam == 0 && setForeignTeam == 3 || setHomeTeam == 1 && setForeignTeam == 3) {
-                    int played1 = volleyballT1.getPlayed();
+                    int played1 = firstVolleyballTeam.getPlayed();
                     int played2 = volleyballTeam.getPlayed();
                     played1 += 1;
                     played2 += 1;
-                    volleyballT1.setPlayed(played1);
+                    firstVolleyballTeam.setPlayed(played1);
                     volleyballTeam.setPlayed(played2);
 
                     int won = 0;
@@ -423,16 +422,16 @@ public class Menu {
                     won += win;
                     volleyballTeam.setWon(won);
 
-                    int lost = volleyballT1.getLose();
+                    int lost = firstVolleyballTeam.getLose();
                     lose += lost;
-                    volleyballT1.setLose(lose);
+                    firstVolleyballTeam.setLose(lose);
                 } else if (setHomeTeam == 2 && setForeignTeam == 3) {
 
-                    int played1 = volleyballT1.getPlayed();
+                    int played1 = firstVolleyballTeam.getPlayed();
                     int played2 = volleyballTeam.getPlayed();
                     played1 += 1;
                     played2 += 1;
-                    volleyballT1.setPlayed(played1);
+                    firstVolleyballTeam.setPlayed(played1);
                     volleyballTeam.setPlayed(played2);
 
                     int won = 0;
@@ -440,9 +439,9 @@ public class Menu {
                     int lose = 0;
                     lose += 1;
 
-                    int points = volleyballT1.getPoints();
+                    int points = firstVolleyballTeam.getPoints();
                     points += 1;
-                    volleyballT1.setPoints(points);
+                    firstVolleyballTeam.setPoints(points);
 
                     int points2 = volleyballTeam.getPoints();
                     points2 += 2;
@@ -452,14 +451,14 @@ public class Menu {
                     won += win;
                     volleyballTeam.setWon(won);
 
-                    int lost = volleyballT1.getLose();
+                    int lost = firstVolleyballTeam.getLose();
                     lose += lost;
-                    volleyballT1.setLose(lose);
+                    firstVolleyballTeam.setLose(lose);
 
                 }
-                volleyballService.joinGame(volleyballT1);
+                volleyballService.joinGame(firstVolleyballTeam);
                 volleyballService.joinGame(volleyballTeam);
-                volleyballService.viewClubTable(volleyballT1, volleyballTeam, setHomeTeam, setForeignTeam);
+                volleyballService.viewClubTable(firstVolleyballTeam, volleyballTeam, setHomeTeam, setForeignTeam);
             }
 
         }

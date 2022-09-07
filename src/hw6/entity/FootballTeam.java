@@ -1,5 +1,7 @@
 package hw6.entity;
 
+import java.util.Objects;
+
 public class FootballTeam extends Team {
     private int drawn, gf, ga, gd;
 
@@ -46,6 +48,19 @@ public class FootballTeam extends Team {
 
     public void setGd(int gd) {
         this.gd = gd;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FootballTeam that = (FootballTeam) o;
+        return drawn == that.drawn && gf == that.gf && ga == that.ga && gd == that.gd;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(drawn, gf, ga, gd);
     }
 
     @Override
