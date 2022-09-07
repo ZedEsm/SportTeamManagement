@@ -1,9 +1,10 @@
 package hw6.entity;
-public class Football_Team extends Team {
-    private int drawn,gf,ga,gd;
 
-    public Football_Team(String club, int played, int won, int drawn, int lost, int gf, int ga, int gd, int points) {
-        super(club,won,lost,points,played);
+public class FootballTeam extends Team {
+    private int drawn, gf, ga, gd;
+
+    public FootballTeam(String club, int played, int won, int drawn, int lost, int gf, int ga, int gd, int points) {
+        super(club, won, lost, points, played);
         this.drawn = drawn;
         this.gf = gf;
         this.ga = ga;
@@ -11,7 +12,7 @@ public class Football_Team extends Team {
     }
 
 
-    public Football_Team(String clubName) {
+    public FootballTeam(String clubName) {
         super(clubName);
     }
 
@@ -29,7 +30,7 @@ public class Football_Team extends Team {
 
     @Override
     public String toString() {
-        return "Football_Team{" +
+        return "FootballTeam{" +
                 ", played=" + getPlayed() +
                 ", won=" + getWon() +
                 ", drawn=" + drawn +

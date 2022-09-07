@@ -1,6 +1,6 @@
 package hw6.repository;
 
-import hw6.entity.Football_Team;
+import hw6.entity.FootballTeam;
 import hw6.entity.Team;
 import hw6.util.ApplicationConstant;
 
@@ -27,7 +27,7 @@ public class FootballRepository {
         prepareStatement.executeUpdate();
     }
 
-    public Football_Team findByName(String name) throws Exception {
+    public FootballTeam findByName(String name) throws Exception {
         String QUERY = "SELECT * FROM footbal WHERE club =?";
         PreparedStatement statement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         statement.setString(1, name);
@@ -42,12 +42,12 @@ public class FootballRepository {
             int ga = resultSet.getInt("ga");
             int gd = resultSet.getInt("gd");
             int points = resultSet.getInt("points");
-            return new Football_Team(clubName, played, won, drawn, lost, gf, ga, gd, points);
+            return new FootballTeam(clubName, played, won, drawn, lost, gf, ga, gd, points);
         }
-        throw new Exception("Football_Team Not Found");
+        throw new Exception("FootballTeam Not Found");
     }
 
-    public void updateData(Football_Team footballTeam) throws SQLException {
+    public void updateData(FootballTeam footballTeam) throws SQLException {
         String QUERY = "UPDATE footbal SET played=?,won=?,drawn =?,lost = ?,gf = ?,ga =?,gd = ?,points =? WHERE club = ?";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         prepareStatement.setInt(1, footballTeam.getPlayed());
@@ -80,13 +80,14 @@ public class FootballRepository {
             int ga = resultSet.getInt("ga");
             int gd = resultSet.getInt("gd");
             int points = resultSet.getInt("points");
-            Team footballTeam = new Football_Team(club, played, won, drawn, lost, gf, ga, gd, points);
+            Team footballTeam = new FootballTeam(club, played, won, drawn, lost, gf, ga, gd, points);
             footballTeams.add(footballTeam);
 
         }
         return footballTeams;
     }
-    public void match(Football_Team footballTeam, Football_Team secondFootballTeam, int gft1, int gft2) throws SQLException {
+
+    public void match(FootballTeam footballTeam, FootballTeam secondFootballTeam, int gft1, int gft2) throws SQLException {
         String QUERY = "INSERT INTO bazi(hometeam,foreignnteam,goalhome,goalforeign) VALUES (?,?,?,?)";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         prepareStatement.setString(1, footballTeam.getName());

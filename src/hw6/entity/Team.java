@@ -19,7 +19,7 @@ public abstract class Team {
 
     private int played;
 
-    public Team(String name, int won, int lose, int points,int played) {
+    public Team(String name, int won, int lose, int points, int played) {
         this.name = name;
         this.won = won;
         this.lose = lose;
@@ -36,7 +36,7 @@ public abstract class Team {
     }
 
 
-    public Team(String name){
+    public Team(String name) {
         this.name = name;
     }
 

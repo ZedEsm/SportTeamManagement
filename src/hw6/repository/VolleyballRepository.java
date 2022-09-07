@@ -1,6 +1,5 @@
 package hw6.repository;
 
-import hw6.entity.Football_Team;
 import hw6.entity.Team;
 import hw6.entity.VolleyballTeam;
 import hw6.util.ApplicationConstant;
@@ -22,6 +21,7 @@ public class VolleyballRepository {
         prepareStatement.setInt(5, 0);
         prepareStatement.executeUpdate();
     }
+
     public void delete(String name) throws SQLException {
         String QUERY = "DELETE FROM volleyball WHERE teamname = ? ";
         PreparedStatement statement = ApplicationConstant.getConnection().prepareStatement(QUERY);
@@ -29,6 +29,7 @@ public class VolleyballRepository {
         statement.executeUpdate();
 
     }
+
     public VolleyballTeam findByName(String name) throws Exception {
         String QUERY = "SELECT * FROM volleyball WHERE teamname =?";
         PreparedStatement statement = ApplicationConstant.getConnection().prepareStatement(QUERY);
@@ -40,10 +41,11 @@ public class VolleyballRepository {
             int won = resultSet.getInt("won");
             int lost = resultSet.getInt("lose");
             int points = resultSet.getInt("points");
-            return new VolleyballTeam(clubName,won,lost,points,played);
+            return new VolleyballTeam(clubName, won, lost, points, played);
         }
         throw new Exception("Voleyball_Team Not Found");
     }
+
     public List<Team> showVolleyballTable() throws SQLException {
         List<Team> volleyballTeams = new ArrayList<>();
         String query = "SELECT * FROM volleyball ORDER BY points DESC";
@@ -55,29 +57,31 @@ public class VolleyballRepository {
             int won = resultSet.getInt("won");
             int lost = resultSet.getInt("lose");
             int points = resultSet.getInt("points");
-            Team volleyballTeam = new VolleyballTeam(club,won,lost,points,played);
+            Team volleyballTeam = new VolleyballTeam(club, won, lost, points, played);
             volleyballTeams.add(volleyballTeam);
 
         }
         return volleyballTeams;
     }
+
     public void updateData(VolleyballTeam volleyballTeam) throws SQLException {
         String QUERY = "UPDATE volleyball SET played=?,won =?,lose = ?,points = ? WHERE teamname=?";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         prepareStatement.setInt(1, volleyballTeam.getPlayed());
         prepareStatement.setInt(2, volleyballTeam.getWon());
         prepareStatement.setInt(3, volleyballTeam.getLose());
-        prepareStatement.setInt(4,volleyballTeam.getPoints());
+        prepareStatement.setInt(4, volleyballTeam.getPoints());
         prepareStatement.setString(5, volleyballTeam.getName());
         int upIndex = prepareStatement.executeUpdate();
         if (upIndex < 0) {
             System.out.println("Update Failed");
         }
     }
+
     public void match(VolleyballTeam team1, VolleyballTeam team2, int seth, int setf) throws SQLException {
         String QUERY = "INSERT INTO volleymatch(hometeam,awayteam,seth,setf) VALUES (?,?,?,?)";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
-        prepareStatement.setString(1,team1.getName() );
+        prepareStatement.setString(1, team1.getName());
         prepareStatement.setString(2, team2.getName());
         prepareStatement.setInt(3, seth);
         prepareStatement.setInt(4, setf);

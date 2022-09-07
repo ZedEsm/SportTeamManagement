@@ -1,6 +1,5 @@
 package hw6.service;
 
-import hw6.entity.Football_Team;
 import hw6.entity.Team;
 import hw6.entity.VolleyballTeam;
 import hw6.repository.VolleyballRepository;

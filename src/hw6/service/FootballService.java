@@ -1,6 +1,6 @@
 package hw6.service;
 
-import hw6.entity.Football_Team;
+import hw6.entity.FootballTeam;
 import hw6.entity.Team;
 import hw6.repository.FootballRepository;
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 public class FootballService implements LeagueService {
     private static final FootballRepository footballRepository = new FootballRepository();
+
     @Override
     public void addTeam(String teamName) throws SQLException {
         footballRepository.addClub(teamName);
@@ -22,12 +23,13 @@ public class FootballService implements LeagueService {
 
     @Override
     public void joinGame(Team footballTeam) throws SQLException {
-        footballRepository.updateData((Football_Team) footballTeam);
+        footballRepository.updateData((FootballTeam) footballTeam);
 
     }
+
     @Override
-    public void viewClubTable(Team firstFootballTeam, Team secondFootballTeam,int gft1,int gft2) throws SQLException {
-        footballRepository.match((Football_Team) firstFootballTeam, (Football_Team) secondFootballTeam, gft1, gft2);
+    public void viewClubTable(Team firstFootballTeam, Team secondFootballTeam, int gft1, int gft2) throws SQLException {
+        footballRepository.match((FootballTeam) firstFootballTeam, (FootballTeam) secondFootballTeam, gft1, gft2);
     }
 
 
@@ -38,7 +40,7 @@ public class FootballService implements LeagueService {
 
     @Override
     public Team findBName(String name) throws Exception {
-       return footballRepository.findByName(name);
+        return footballRepository.findByName(name);
 
     }
 }

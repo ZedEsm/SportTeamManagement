@@ -2,10 +2,13 @@ package hw6.entity;
 
 public class VolleyballTeam extends Team {
     private int scoreSet;
-    public VolleyballTeam(String name, int won, int lose, int points,int played) {
-        super(name,won,lose,points,played);;
+
+    public VolleyballTeam(String name, int won, int lose, int points, int played) {
+        super(name, won, lose, points, played);
+        ;
     }
-    public VolleyballTeam(int scoreSet){
+
+    public VolleyballTeam(int scoreSet) {
         super();
         this.scoreSet = scoreSet;
     }
@@ -18,7 +21,7 @@ public class VolleyballTeam extends Team {
         this.scoreSet = scoreSet;
     }
 
-    public VolleyballTeam(String name){
+    public VolleyballTeam(String name) {
         super(name);
     }
 }
