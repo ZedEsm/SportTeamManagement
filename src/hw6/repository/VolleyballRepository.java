@@ -43,7 +43,7 @@ public class VolleyballRepository {
             int points = resultSet.getInt("points");
             return new VolleyballTeam(clubName, won, lost, points, played);
         }
-        throw new Exception("Voleyball_Team Not Found");
+        throw new Exception("Volleyball_Team Not Found");
     }
 
     public List<Team> showVolleyballTable() throws SQLException {
@@ -78,13 +78,13 @@ public class VolleyballRepository {
         }
     }
 
-    public void match(VolleyballTeam team1, VolleyballTeam team2, int seth, int setf) throws SQLException {
+    public void match(VolleyballTeam team1, VolleyballTeam team2, int seth, int seaway) throws SQLException {
         String QUERY = "INSERT INTO volleymatch(hometeam,awayteam,seth,setf) VALUES (?,?,?,?)";
         PreparedStatement prepareStatement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         prepareStatement.setString(1, team1.getName());
         prepareStatement.setString(2, team2.getName());
         prepareStatement.setInt(3, seth);
-        prepareStatement.setInt(4, setf);
+        prepareStatement.setInt(4, seaway);
         prepareStatement.executeUpdate();
     }
 }

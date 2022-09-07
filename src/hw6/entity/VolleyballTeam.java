@@ -5,7 +5,6 @@ public class VolleyballTeam extends Team {
 
     public VolleyballTeam(String name, int won, int lose, int points, int played) {
         super(name, won, lose, points, played);
-        ;
     }
 
     public VolleyballTeam(int scoreSet) {

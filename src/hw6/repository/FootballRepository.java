@@ -102,7 +102,6 @@ public class FootballRepository {
         PreparedStatement statement = ApplicationConstant.getConnection().prepareStatement(QUERY);
         statement.setString(1, name);
         statement.executeUpdate();
-
     }
 
 }

@@ -28,21 +28,6 @@ public class FootballTeam extends Team {
         return gf;
     }
 
-    @Override
-    public String toString() {
-        return "FootballTeam{" +
-                ", played=" + getPlayed() +
-                ", won=" + getWon() +
-                ", drawn=" + drawn +
-                ", lost=" + getLose() +
-                ", gf=" + gf +
-                ", ga=" + ga +
-                ", gd=" + gd +
-                ", points=" + getPoints() +
-                ", club='" + getName() + '\'' +
-                '}';
-    }
-
     public void setGf(int gf) {
         this.gf = gf;
     }
@@ -62,5 +47,21 @@ public class FootballTeam extends Team {
     public void setGd(int gd) {
         this.gd = gd;
     }
+
+    @Override
+    public String toString() {
+        return "FootballTeam{" +
+                ", played=" + getPlayed() +
+                ", won=" + getWon() +
+                ", drawn=" + drawn +
+                ", lost=" + getLose() +
+                ", gf=" + gf +
+                ", ga=" + ga +
+                ", gd=" + gd +
+                ", points=" + getPoints() +
+                ", club='" + getName() + '\'' +
+                '}';
+    }
+
 
 }
