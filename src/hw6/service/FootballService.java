@@ -17,8 +17,8 @@ public class FootballService implements LeagueService {
     }
 
     @Override
-    public void deleteTeam(String name) {
-
+    public void deleteTeam(String name) throws SQLException {
+        footballRepository.delete(name);
     }
 
     @Override

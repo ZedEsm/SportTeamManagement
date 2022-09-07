@@ -95,7 +95,9 @@ public class Menu {
                         footballservice.addTeam(footballTeam.getName());
                     }
                     case 2 -> {
-                        //delete
+                        System.out.println("Enter Name For Deleting:");
+                        String name = scanner.next();
+                        footballservice.deleteTeam(name);
                     }
                     case 3 -> {
                         String[] s = {"1- Join Game", "2- View Information About Club", "3- View Table Of Composition"};

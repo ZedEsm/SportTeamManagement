@@ -97,4 +97,12 @@ public class FootballRepository {
         prepareStatement.executeUpdate();
     }
 
+    public void delete(String name) throws SQLException {
+        String QUERY = "DELETE FROM footbal WHERE club = ? ";
+        PreparedStatement statement = ApplicationConstant.getConnection().prepareStatement(QUERY);
+        statement.setString(1, name);
+        statement.executeUpdate();
+
+    }
+
 }
